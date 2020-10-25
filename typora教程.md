@@ -10,3 +10,6 @@ alert(100)
 $$
 a^2 =64
 $$
+
+![docker_structure.jpg](https://i.loli.net/2020/10/25/AYBs3uTrMhNV8nR.jpg)
+
