@@ -7,3 +7,8 @@
 7、dockerfile语法
 8、docker   link用法。 多个容器间链接。-----------  
 9、kubernate编排、buildkit构建、之间的联系-----------
+
+![](https://i.loli.net/2020/10/25/AYBs3uTrMhNV8nR.jpg)
+
+
+
