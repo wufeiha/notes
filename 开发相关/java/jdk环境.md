@@ -14,7 +14,7 @@
    export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
    ```
 
-3. **启用**
+3. **启用配置文件**
 
    ```shell
    source /etc/profile
