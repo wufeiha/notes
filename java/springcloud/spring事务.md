@@ -1,4 +1,4 @@
-5. @Transactional注解只能作用在public方法上，原因：private/protected方法对代理类不可见
+1. @Transactional注解只能作用在public方法上，原因：private/protected方法对代理类不可见
 
 6. spring事务 非运行时异常能否回滚？可以，配置@Transactional(rollbackFor=Exception.class)
 

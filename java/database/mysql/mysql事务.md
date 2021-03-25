@@ -47,6 +47,14 @@
    | 可重复读（Repeatable read）  | 不可能 | 不可能     | 可能   |
    | 可串行化（Serializable ）    | 不可能 | 不可能     | 不可能 |
 
+<<<<<<< HEAD:java/database/mysql/mysql事务及锁.md
 4. mysql锁   https://zhuanlan.zhihu.com/p/29150809
 
    https://blog.csdn.net/a837199685/article/details/54563740
+=======
+4. mysql锁   
+
+   https://blog.csdn.net/a837199685/article/details/54563740
+   
+   https://zhuanlan.zhihu.com/p/29150809
+>>>>>>> 807110cd700558762c2a2a943f5cad40e5ebabec:java/database/mysql/mysql事务.md
