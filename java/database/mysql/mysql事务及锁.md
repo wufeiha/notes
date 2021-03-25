@@ -47,6 +47,6 @@
    | 可重复读（Repeatable read）  | 不可能 | 不可能     | 可能   |
    | 可串行化（Serializable ）    | 不可能 | 不可能     | 不可能 |
 
-4. mysql锁   https://developer.ibm.com/zh/technologies/databases/articles/os-mysql-transaction-isolation-levels-and-locks/
+4. mysql锁   https://zhuanlan.zhihu.com/p/29150809
 
    https://blog.csdn.net/a837199685/article/details/54563740
