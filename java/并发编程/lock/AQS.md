@@ -1,16 +1,65 @@
-## 1. 信号量与管程
+### AQS对CLH队列的增强
 
+1. 支持阻塞而不是一直自旋，竞争激烈时，阻塞性能更好
 
+2. 支持可重入
 
+3. 支持取消节点
 
+4. 支持中断
 
-https://zhuanlan.zhihu.com/p/40025595
+5. 支持独占和共享两种模式
 
-https://www.cnblogs.com/binarylei/p/12555166.html#31-%E9%94%81%E7%8A%B6%E6%80%81 
+6. 支持Condition，Condition替代对象监听器(Monitor)用来等待，唤醒线程，用于线程间的协作
 
-https://www.cnblogs.com/binarylei/p/12555166.html#31-%E9%94%81%E7%8A%B6%E6%80%81
+### 整体结构
 
-活锁死锁demo    https://github1s.com/qindongliang/Java-Note
+   ![img](https://i.loli.net/2021/04/23/Rbj1DQa57czxeEw.png)
 
-CLH,MCS并发队列模型   https://www.cnblogs.com/sanzao/p/10567529.html
+### 同步队列结构
 
+#### 结构图
+
+![img](https://i.loli.net/2021/04/23/lko3f7SuItWjdpN.png)
+
+#### 同步队列特点
+
+- 同步队列头结点是哨兵结点，表示获取锁对应的线程结点。
+- **当获取锁时，其前驱结点必定为头结点。**获取锁后，需要将头结点指向当前线程对应的结点。
+- 当释放锁时，需要通过 unparkSuccessor 方法唤醒头结点的后继结点。
+
+#### 与传统CLH的区别
+
+1. 同步队列是双向链表。事实上，和二叉树一样，双向链表目前也没有无锁算法的实现。双向链表需要同时设置前驱和后继结点，这两次操作只能保证一个是原子性的。
+
+2. **node.pre 一定可以遍历所有结点，是线程安全的**，而后继结点 node.next 则是线程不安全的。也就是说，node.pre 一定可以遍历整个链表，而 node.next 则不一定。至于为什么选择前驱结点而不是后继结点，会在 "第五部分 - AQS 无锁队列" 中进一步分析。
+
+### Node节点
+#### 状态说明
+
+- **CANCELLED(1)**：表示当前结点已取消调度。因为超时或者中断，结点会被设置为取消状态，进入该状态后的结点将不会再变化。注意，**只有 CANCELLED 是正值，因此正值表示结点已被取消，而负值表示有效等待状态。**
+- **SIGNAL(-1)**：表示后继结点在等待当前结点唤醒。后继结点入队时，会将前继结点的状态更新为 SIGNAL。
+- **CONDITION(-2)**：表示结点等待在Condition上，当其他线程调用了Condition的signal()方法后，CONDITION状态的结点将**从等待队列转移到同步队列中**，等待获取同步锁。
+- **PROPAGATE(-3)**：共享模式下，前继结点不仅会唤醒其后继结点，同时也可能会唤醒后继的后继结点。
+- **INITIAL(0)**：新结点入队时的默认状态。
+
+#### 状态变化过程
+
+![img](https://i.loli.net/2021/04/23/9fJvIdi5tXe6Ppm.png)
+
+### 相关方法
+
+#### 获取锁
+
+- acquire：lock.lock() 方法用于获取锁。
+- tryAcquire：具体获取锁的策略，由子类实现。
+- addWaiter：通过 enq 方法添加到同步队列中。需要注意的是 addWaiter 方法会尝试一次添加到同步队列中，如果不成功，再调用 enq 自旋添加到同步队列中。
+- acquireQueued：线程进入同步队列后，会将该线程挂起，直到有甚至线程唤醒该线程。
+- shouldParkAfterFailedAcquire：将前驱结点的状态修改成 SIGNAL，同时会清理已经 CANCELLED 的结点。注意，只有前驱结点的状态为 SIGNAL，当它释放锁时才会唤醒后继结点。
+- parkAndCheckInterrupt：挂起线程，并判断线程在自旋过程中，是否被中断过。
+
+#### 释放锁
+
+- release：lock.unlock() 方法用于释放锁。
+- tryRelease：具体释放锁的策略，由子类实现。
+- unparkSuccessor：唤醒后继结点。
