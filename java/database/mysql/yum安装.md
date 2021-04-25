@@ -65,8 +65,6 @@
 
    ![image-20201207191906901](https://i.loli.net/2020/12/07/5C7qUYQw83vtfTW.png)
 
-   
-
 7. 创建远程连接账户
 
    ```shell
