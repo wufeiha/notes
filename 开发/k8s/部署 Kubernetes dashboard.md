@@ -1,3 +1,5 @@
+**作用：**k8s web 可视化面板
+
 **参考：**https://github.com/AliyunContainerService/k8s-for-docker-desktop
 
 ### 启动kubernetes

@@ -5,7 +5,7 @@
 
 2. <font color='red'>interrupt()/isInterrupted()/interrupted()</font>  
 
-   > 1. Interrupt()中断线程，如果中断非阻塞线程需要被中断线程配合，在被中断内判断标志位，进行相关处理并及时return；如果中断阻断线程(例如执行sleep())会抛出InterruptedException异常导致线程结束。
+   > 1. Interrupt()中断线程，如果中断非阻塞线程需要被中断线程配合(即使用`interrupted()`判断配合是否中断)，在被中断内判断标志位，进行相关处理并及时return；如果中断阻断线程(例如执行sleep())会抛出InterruptedException异常导致线程结束。
    > 2. interrupted()是静态方法，内部调用isInterrupted(true),会清除中断位，也就是说执行Interrupt()中断线程，调用Thread.interrupted()第一次返回true,第二次返回false
    > 3. isInterrupted()，内部调用isInterrupted(false)不会清除中断位, 执行Interrupt()中断线程后，调用isInterrupted()永远返回true
 

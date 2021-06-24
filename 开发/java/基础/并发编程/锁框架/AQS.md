@@ -51,7 +51,7 @@
 
 #### 获取锁
 
-- acquire：lock.lock() 方法用于获取锁。
+- acquire：方法用于获取锁。
 - tryAcquire：具体获取锁的策略，由子类实现。
 - addWaiter：通过 enq 方法添加到同步队列中。需要注意的是 addWaiter 方法会尝试一次添加到同步队列中，如果不成功，再调用 enq 自旋添加到同步队列中。
 - acquireQueued：线程进入同步队列后，会将该线程挂起，直到有甚至线程唤醒该线程。
@@ -60,6 +60,6 @@
 
 #### 释放锁
 
-- release：lock.unlock() 方法用于释放锁。
+- release：方法用于释放锁。
 - tryRelease：具体释放锁的策略，由子类实现。
 - unparkSuccessor：唤醒后继结点。
