@@ -40,15 +40,15 @@
 
 ![截屏2021-06-24 16.02.15](https://i.loli.net/2021/06/24/T95PchwjUJqMKEO.png)
 
-![img](https://static001.geekbang.org/infoq/fd/fdfe29d209918316409200f10cf63ebd.png)
+![img](https://s2.loli.net/2022/03/24/xTn1Khbf5CrMsHt.png)
 
 #### mmap
 
-![img](https://static001.geekbang.org/infoq/7b/7b2d0b80328143322445f55f954144ec.png)
+![img](https://s2.loli.net/2022/03/24/M3LRo2wXI1x6NeP.png)
 
 #### 零拷贝
 
-![img](https://static001.geekbang.org/infoq/fb/fb5b1c0a4358a5c7608251c91e6b971b.png)
+![img](https://s2.loli.net/2022/03/24/z5TeudIwaYho1gn.png)
 
 **读取**
 
