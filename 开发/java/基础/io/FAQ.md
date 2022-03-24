@@ -40,6 +40,16 @@
 
 ![截屏2021-06-24 16.02.15](https://i.loli.net/2021/06/24/T95PchwjUJqMKEO.png)
 
+![img](https://static001.geekbang.org/infoq/fd/fdfe29d209918316409200f10cf63ebd.png)
+
+#### mmap
+
+![img](https://static001.geekbang.org/infoq/7b/7b2d0b80328143322445f55f954144ec.png)
+
+#### 零拷贝
+
+![img](https://static001.geekbang.org/infoq/fb/fb5b1c0a4358a5c7608251c91e6b971b.png)
+
 **读取**
 
 1.用户空间向内核空间发出指令——我要读取文件a
